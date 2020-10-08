@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Estação Metereológica</h1>
+      <p>Cadastre a estação </p>
+      <div className="form">
+        <label>Serial</label>
+        <input type="text" name="serial"/>
+
+        <label>Latitude</label>
+        <input type="text" name="lat"/>
+
+        <label>Longitude</label>
+        <input type="text" name="lon"/>
+
+        <label>Nome</label>
+        <input type="text" name="nome"/>
+        
+        <button type="submit">Cadastrar</button>
+      </div>
     </div>
   );
 }
