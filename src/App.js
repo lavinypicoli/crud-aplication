@@ -3,6 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import Paper from '@material-ui/core/Paper';
 import './App.css';
 import Axios from 'axios';
 
@@ -20,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
+  button:{
+    backgroundColor: '#32CD32'
+  },
+  updateButton: {
+    backgroundColor: '#FFD700'
+  },
+  deleteButton: {
+    backgroundColor: '#FF0000'
+  },
+  table: {
+    minWidth: 650,
+  },
 }));
 
 function App() {
@@ -31,6 +50,13 @@ const [serial, setSerial] = useState("");
 const [lat, setLat] = useState("");
 const [lon, setLon] = useState("");
 const [nome, setNome] = useState("");
+const [estacoesList, setEstacoesList] = useState([]);
+
+useEffect(() =>{
+  Axios.get('http://localhost:3001/api/get').then((response) => {
+    setEstacoesList(response.data);
+  });
+}, []);
 
 const submit = () =>{
     Axios.post('http://localhost:3001/api/insert', {
@@ -38,9 +64,18 @@ const submit = () =>{
       lat: lat,
       lon: lon,
       nome: nome,
-    }).then(() =>{
-      alert("Cadastrado com sucesso!")
     });
+    setEstacoesList([
+      ...estacoesList, {
+        serial: serial,
+        lat: lat,
+        lon: lon,
+        nome: nome,
+      },
+    ]);
+};
+const deleteEstacoes = () =>{
+  Axios.delete("http://localhost:3001/api/delete", serial);
 };
 
   return (
@@ -98,9 +133,35 @@ const submit = () =>{
                 }}
                 variant="outlined"
               />
+              <Button variant="contained" className={classes.button}
+              type="submit" onClick={submit}>Cadastrar</Button>
             </div>
+             
       </CardContent>
     </Card>
+        {estacoesList.map((val) =>{
+            return <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableCell align="left">Serial</TableCell>
+                  <TableCell align="left">Latitude</TableCell>
+                  <TableCell align="left">Longitude</TableCell>
+                  <TableCell align="left">Nome</TableCell>
+                  <Button variant="contained" className={classes.deleteButton}> Delete </Button>
+                  <Button variant="contained" className={classes.updateButton}> Update </Button>
+                    
+                </TableHead>
+                <TableBody>
+                
+                    <TableCell align="left">{val.serial}</TableCell>
+                    <TableCell align="left">{val.lat}</TableCell>
+                    <TableCell align="left">{val.lon}</TableCell>
+                    <TableCell align="left">{val.nome}</TableCell>
+                  
+                </TableBody>
+              </Table>
+            </TableContainer>
+        })}
     </div>
   );
 }

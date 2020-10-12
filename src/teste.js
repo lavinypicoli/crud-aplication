@@ -33,3 +33,22 @@
   
   <button type="submit" onClick={submit}>Cadastrar</button>
 </div> */}
+
+
+   
+<div>
+<table>
+<tr>
+  <th>Serial</th>
+  <th>Latitude</th>
+  <th>Longitude</th>
+  <th>Nome</th>
+</tr>
+<tr>
+<td>{val.serial}</td>
+<td>{val.lat}</td>
+<td>{val.lon}</td>
+<td>{val.nome}</td>
+</tr>
+</table>
+</div>
