@@ -1,54 +1,45 @@
-<div>
-<h1>Estação Metereológica</h1>
-<p>Cadastre a estação </p>
-<TextField
-    id="outlined-full-width"
-    label="Serial"
-    style={{ margin: 20 }}
-    placeholder="Placeholder"
-    margin="normal"
-    InputLabelProps={{
-      shrink: true,
-    }}
-    variant="outlined"
-  />
-</div>
+/* const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
+const mysql = require('mysql');
+
+const db = mysql.createPool({
+    host:'localhost',
+    user: 'laviny',
+    password: '12345',
+    database: 'atividade'
+});
+
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 
+app.get('/api/get', (req, res) =>{
+    const sqlSelect = "SELECT * FROM estacoes";
+    db.query(sqlSelect, (err, results) =>{
+        res.send(results);
+    });
+
+});
+app.post("/api/insert", (req, res) =>{
+
+    const serial = req.body.serial;
+    const lat = req.body.lat;
+    const lon = req.body.lon;
+    const nome = req.body.nome;
+
+    const sqlInsert = "INSERT INTO estacoes (serial, lat, lon, nome) VALUES (?,?,?,?)";
+    db.query(sqlInsert, [serial, lat, lon, nome], (err, results) =>{
+            console.log(results);
+    });
+});
 
 
+/* app.delete('/api/delete', (req)) */
 
-{/* <div className="form">
-  <label>Serial</label>
-  <input type="text" name="serial" onChange={(e) =>{setSerial(e.target.value);}}/>
-
-  <label>Latitude</label>
-  <input type="text" name="lat" onChange={(e) =>{setLat(e.target.value);}}/>
-
-  <label>Longitude</label>
-  <input type="text" name="lon" onChange={(e) =>{setLon(e.target.value);}}/>
-
-  <label>Nome</label>
-  <input type="text" name="nome" onChange={(e) =>{setNome(e.target.value);}}/>
-  
-  <button type="submit" onClick={submit}>Cadastrar</button>
-</div> */}
-
-
-   
-<div>
-<table>
-<tr>
-  <th>Serial</th>
-  <th>Latitude</th>
-  <th>Longitude</th>
-  <th>Nome</th>
-</tr>
-<tr>
-<td>{val.serial}</td>
-<td>{val.lat}</td>
-<td>{val.lon}</td>
-<td>{val.nome}</td>
-</tr>
-</table>
-</div>
+/* app.listen(3001, () => {
+    console.log("Sevidor rodando na porta 3001");
+});
+ */ 

@@ -74,9 +74,9 @@ const submit = () =>{
       },
     ]);
 };
-const deleteEstacoes = () =>{
+/* const deleteEstacoes = () =>{
   Axios.delete("http://localhost:3001/api/delete", serial);
-};
+}; */
 
   return (
     <div className={classes.root}>
@@ -139,29 +139,37 @@ const deleteEstacoes = () =>{
              
       </CardContent>
     </Card>
-        {estacoesList.map((val) =>{
-            return <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableCell align="left">Serial</TableCell>
-                  <TableCell align="left">Latitude</TableCell>
-                  <TableCell align="left">Longitude</TableCell>
-                  <TableCell align="left">Nome</TableCell>
-                  <Button variant="contained" className={classes.deleteButton}> Delete </Button>
-                  <Button variant="contained" className={classes.updateButton}> Update </Button>
-                    
-                </TableHead>
-                <TableBody>
-                
-                    <TableCell align="left">{val.serial}</TableCell>
-                    <TableCell align="left">{val.lat}</TableCell>
-                    <TableCell align="left">{val.lon}</TableCell>
-                    <TableCell align="left">{val.nome}</TableCell>
-                  
-                </TableBody>
-              </Table>
-            </TableContainer>
-        })}
+        
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableCell align="left">Serial</TableCell>
+                <TableCell align="left">Latitude</TableCell>
+                <TableCell align="left">Longitude</TableCell>
+                <TableCell align="left">Nome</TableCell>
+                <TableCell align="left">Action</TableCell>
+                <TableCell align="left">Action</TableCell>  
+              </TableHead>
+              
+                {estacoesList.map((estacao) => (
+                  <TableBody>
+                    {console.log(estacao)}
+                    <TableCell align="left">{estacao.serial}</TableCell>
+                    <TableCell align="left">{estacao.lat}</TableCell>
+                    <TableCell align="left">{estacao.lon}</TableCell>
+                    <TableCell align="left">{estacao.nome}</TableCell>
+                    <TableCell>
+                      <Button variant="contained" className={classes.deleteButton}> Delete </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="contained" className={classes.updateButton}> Update </Button>
+                    </TableCell>
+                  </TableBody>
+                ))}
+              
+            </Table>
+          </TableContainer>
+    
     </div>
   );
 }
