@@ -74,9 +74,6 @@ const submit = () =>{
       },
     ]);
 };
-/* const deleteEstacoes = () =>{
-  Axios.delete("http://localhost:3001/api/delete", serial);
-}; */
 
   return (
     <div className={classes.root}>
@@ -149,6 +146,7 @@ const submit = () =>{
                 <TableCell align="left">Nome</TableCell>
                 <TableCell align="left">Action</TableCell>
                 <TableCell align="left">Action</TableCell>  
+                <TableCell align="left">Action</TableCell> 
               </TableHead>
               
                 {estacoesList.map((estacao) => (
@@ -163,6 +161,9 @@ const submit = () =>{
                     </TableCell>
                     <TableCell>
                       <Button variant="contained" className={classes.updateButton}> Update </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="contained" color="primary">Inserir novos dados</Button>
                     </TableCell>
                   </TableBody>
                 ))}
